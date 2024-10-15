@@ -16,6 +16,7 @@ jobs:
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
+          echo "Deploying to $SERVER_HOST"
           echo "$SSH_PRIVATE_KEY" > /tmp/ssh_key
           chmod 600 /tmp/ssh_key
 
@@ -25,3 +26,4 @@ jobs:
           EOF
 
           rm /tmp/ssh_key
+        shell: /usr/bin/bash -e {0}
