@@ -1,6 +1,9 @@
 name: Build and Deploy
 
-on: push
+on:
+  push:
+    branches:
+      - master
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -11,13 +14,13 @@ jobs:
       - name: Set up SSH key
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          HOST: ${{ secrets.HOST }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
         run: |
           mkdir -p ~/.ssh
-          echo Setup ssh for $HOST
+          echo Setup ssh for $SERVER_HOST
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -p 7082 $HOST >> ~/.ssh/known_hosts
+          ssh-keyscan -p 7082 $SERVER_HOST >> ~/.ssh/known_hosts
           sudo apt-get install sshpass
 
       - name: Deploy to server
