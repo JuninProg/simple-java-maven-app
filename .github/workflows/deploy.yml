@@ -20,7 +20,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > /tmp/ssh_key
           chmod 600 /tmp/ssh_key
 
-          ssh -o StrictHostKeyChecking=no -i /tmp/ssh_key $SERVER_USER@$SERVER_HOST << EOF
+          ssh -o StrictHostKeyChecking=no -i /tmp/ssh_key -p 7082 $SERVER_USER@$SERVER_HOST << EOF
             cd ~/promama-infra
             docker-compose up -d --build
           EOF
